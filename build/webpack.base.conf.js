@@ -1,13 +1,28 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-module.exports={
+
+//Main const
+const PATHS = {
+    src: path.join(__dirname, '../src'),
+    dist: path.join(__dirname, '../dist'),
+    assets: 'assets/'
+  }
+
+
+
+  module.exports = {
+    // BASE config
+    externals: {
+      paths: PATHS
+    },
     entry: {
-        app: './src/index.js'
+      app: PATHS.src,
+      // module: `${PATHS.src}/your-module.js`,
     },
     output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, './dist'),
-        publicPath: './dist'
+      filename: `${PATHS.assets}js/[name].js`,
+      path: PATHS.dist,
+      publicPath: '/'
     },
     module: {
         rules: [{
@@ -49,7 +64,7 @@ module.exports={
     
     plugins: [
         new MiniCssExtractPlugin({
-          filename: "[name].css",
+          filename: `${PATHS.assets}css/[name].css`,
         })
       ]
 }
